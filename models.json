@@ -1,0 +1,325 @@
+[
+  {
+    "id": "deepseek/deepseek-r1-0528",
+    "name": "DeepSeek R1-0528",
+    "parameters": {
+      "context": 163840,
+      "max_output_tokens": 163840,
+      "size": "671B"
+    },
+    "provider": "deepseek",
+    "pricePerMillionTokens": {
+      "input": 0.45,
+      "output": 1.9
+    },
+    "capabilities": ["text-generation"],
+    "status": "available",
+    "description": "As of the May 28th update, DeepSeek R1 delivers performance comparable to OpenAI's o1 model, while being fully open-source and offering complete transparency through open reasoning tokens. The model comprises 671 billion parameters, with 37 billion active during each inference pass."
+  },
+  {
+    "id": "google/gemma-3n-e4b-it",
+    "name": "Gemma 3n 4B",
+    "parameters": {
+      "context": 8192,
+      "max_output_tokens": 2000,
+      "size": "4B"
+    },
+    "provider": "google",
+    "pricePerMillionTokens": {
+      "input": 0.01,
+      "output": 0.16
+    },
+    "capabilities": ["text-generation"],
+    "status": "limited",
+    "description": "Trained on over 140 languages and equipped with a flexible 32K token context window, the model is highly adaptable. Its ability to selectively load parameters allows it to optimize performance based on task requirements and device limitations—making it ideal for privacy-preserving, offline, and on-device AI applications."
+  },
+  {
+    "id": "meta-llama/llama-4-maverick",
+    "name": "Llama 4 Maverick",
+    "parameters": {
+      "context": 1048576,
+      "max_output_tokens": 16384,
+      "size": "17B"
+    },
+    "provider": "meta",
+    "pricePerMillionTokens": {
+      "input": 0.13,
+      "output": 0.5
+    },
+    "capabilities": ["text-generation"],
+    "status": "available",
+    "description": "Llama 4 Maverick 17B Instruct (128E) is a high-performance multimodal language model developed by Meta. Built on a mixture-of-experts (MoE) architecture with 128 experts and 17 billion active parameters per forward pass (from a total of 400B), Maverick supports multilingual text and image inputs, generating multilingual text and code outputs across 12 languages. It is instruction-tuned for assistant-like behavior, image reasoning, and general-purpose multimodal interactions, with a strong focus on vision-language tasks."
+  },
+  {
+    "id": "meta-llama/llama-3.3-70b-instruct",
+    "name": "Llama 3.3 70B",
+    "parameters": {
+      "context": 131072,
+      "max_output_tokens": 16000,
+      "size": "70B"
+    },
+    "provider": "meta",
+    "pricePerMillionTokens": {
+      "input": 0.1,
+      "output": 0.3
+    },
+    "capabilities": ["text-generation"],
+    "status": "available",
+    "description": "The Meta Llama 3.3 is a multilingual large language model (LLM) with 70B parameters, designed for text input and output. It is both pretrained and instruction-tuned, specifically optimized for multilingual dialogue applications. Llama 3.3 consistently outperforms many open-source and proprietary chat models across widely recognized industry benchmarks."
+  },
+  {
+    "id": "qwen/qwq-32b",
+    "name": "QwQ 32B",
+    "parameters": {
+      "context": 40960,
+      "max_output_tokens": 40960,
+      "size": "32B"
+    },
+    "provider": "qwen",
+    "pricePerMillionTokens": {
+      "input": 0.13,
+      "output": 0.2
+    },
+    "capabilities": ["text-generation"],
+    "status": "available",
+    "description": "QwQ is the reasoning model of the Qwen series. Compared with conventional instruction-tuned models, QwQ, which is capable of thinking and reasoning, can achieve significantly enhanced performance in downstream tasks, especially hard problems. QwQ-32B is the medium-sized reasoning model, which is capable of achieving competitive performance against state-of-the-art reasoning models, e.g., DeepSeek-R1, o1-mini."
+  },
+  {
+    "id": "openai/gpt-4o-mini",
+    "name": "OpenAI: GPT-4o Mini",
+    "parameters": {
+      "context": 128000,
+      "max_output_tokens": 16000,
+      "size": "-"
+    },
+    "provider": "openai",
+    "pricePerMillionTokens": {
+      "input": 0.15,
+      "output": 0.6
+    },
+    "capabilities": ["text-generation"],
+    "status": "available",
+    "description": "GPT-4o Mini is a smaller, faster, and more cost-effective version of GPT-4o, designed for applications requiring quick responses and efficiency while maintaining strong performance across a wide range of tasks. It supports both text and image inputs while producing text outputs."
+  },
+  {
+    "id": "xai/grok-3",
+    "name": "xAI: Grok-3",
+    "parameters": {
+      "context": 131072,
+      "max_output_tokens": 131072,
+      "size": "-"
+    },
+    "provider": "xai",
+    "pricePerMillionTokens": {
+      "input": 3,
+      "output": 15
+    },
+    "capabilities": ["text-generation"],
+    "status": "available",
+    "description": "Grok 3 is the latest flagship model from xAI, purpose-built to excel in enterprise-grade applications. It demonstrates strong performance across tasks such as data extraction, coding, and text summarization, while showcasing deep domain expertise in fields like finance, healthcare, law, and science."
+  },
+  {
+    "id": "mistralai/mistral-nemo",
+    "name": "Mistral Nemo",
+    "parameters": {
+      "context": 131072,
+      "max_output_tokens": 131072,
+      "size": "12B"
+    },
+    "provider": "mistral",
+    "pricePerMillionTokens": {
+      "input": 0.01,
+      "output": 0.018
+    },
+    "capabilities": ["text-generation"],
+    "status": "available",
+    "description": "This 12B-parameter language model, developed by Mistral in collaboration with NVIDIA, features a 128K token context window and is optimized for high-performance, long-context tasks."
+  },
+  {
+    "id": "openai/o3-mini",
+    "name": "OpenAI: O3 Mini",
+    "parameters": {
+      "context": 200000,
+      "max_output_tokens": 100000,
+      "size": "-"
+    },
+    "provider": "openai",
+    "pricePerMillionTokens": {
+      "input": 1.1,
+      "output": 4.4
+    },
+    "capabilities": ["text-generation"],
+    "status": "available",
+    "description": "OpenAI o3-mini is a cost-efficient language model optimized for STEM reasoning, with notable strengths in science, mathematics, and programming tasks. It introduces a unique reasoning_effort parameter—configurable to \"low\", \"medium\" (default), or \"high\"—allowing developers to fine-tune the model's depth of thought based on task complexity."
+  },
+  {
+    "id": "openai/o4-mini",
+    "name": "OpenAI: O4 Mini",
+    "parameters": {
+      "context": 200000,
+      "max_output_tokens": 100000,
+      "size": "-"
+    },
+    "provider": "openai",
+    "pricePerMillionTokens": {
+      "input": 1.1,
+      "output": 4.4
+    },
+    "capabilities": ["text-generation"],
+    "status": "available",
+    "description": "OpenAI o4-mini is a compact model in the o-series, designed for fast, cost-efficient reasoning while maintaining robust multimodal and agentic capabilities. It supports tool use and demonstrates competitive performance across benchmarks—including 99.5% on AIME (Python) and strong results on SWE-bench—surpassing o3-mini and rivaling o3 in select domains."
+  },
+  {
+    "id": "google/gemini-2.0-flash",
+    "name": "Gemini 2 Flash",
+    "parameters": {
+      "context": 102400,
+      "max_output_tokens": 102400,
+      "size": "-"
+    },
+    "provider": "google",
+    "pricePerMillionTokens": {
+      "input": 0.09,
+      "output": 0.36
+    },
+    "capabilities": ["text-generation"],
+    "status": "available",
+    "description": "Gemini Flash 2.0 delivers a significantly improved time to first token (TTFT) over its predecessor, Gemini Flash 1.5, while maintaining quality comparable to larger models such as Gemini Pro 1.5. It introduces major enhancements in multimodal understanding, coding proficiency, complex instruction following, and function calling—enabling more seamless, responsive, and capable agentic experiences across a wide range of applications."
+  },
+  {
+    "id": "deepseek/deepseek-chat-v3",
+    "name": "DeepSeek V3",
+    "parameters": {
+      "context": 163840,
+      "max_output_tokens": 163840,
+      "size": "671B"
+    },
+    "provider": "deepseek",
+    "pricePerMillionTokens": {
+      "input": 0.35,
+      "output": 0.85
+    },
+    "capabilities": ["text-generation"],
+    "status": "available",
+    "description": "DeepSeek-V3 is the latest release from the DeepSeek team, advancing the instruction-following and coding capabilities of its predecessors. Pretrained on nearly 15 trillion tokens, it demonstrates superior performance compared to other open-source models and competes closely with top-tier closed-source alternatives, according to reported evaluations."
+  },
+  {
+    "id": "deepseek/deepseek-chat-v3-0324",
+    "name": "DeepSeek V3 0324",
+    "parameters": {
+      "context": 163840,
+      "max_output_tokens": 163840,
+      "size": "685B"
+    },
+    "provider": "deepseek",
+    "pricePerMillionTokens": {
+      "input": 0.28,
+      "output": 0.85
+    },
+    "capabilities": ["text-generation"],
+    "status": "available",
+    "description": "DeepSeek V3 is a 685B-parameter mixture-of-experts (MoE) model and the latest evolution in the flagship chat model series from the DeepSeek team. Building on the strengths of its predecessor, it delivers strong performance across a wide range of tasks, further solidifying its position among leading AI models."
+  },
+  {
+    "id": "qwen/qwen3-235b-a22b",
+    "name": "Qwen3 235B A22BB",
+    "parameters": {
+      "context": 40960,
+      "max_output_tokens": 40960,
+      "size": "235B"
+    },
+    "provider": "qwen",
+    "pricePerMillionTokens": {
+      "input": 0.12,
+      "output": 0.57
+    },
+    "capabilities": ["text-generation"],
+    "status": "limited",
+    "description": "Qwen3-235B-A22B is a 235-billion-parameter mixture-of-experts (MoE) language model developed by the Qwen team, with 22 billion active parameters per forward pass. Designed for versatility, it enables seamless switching between a \"thinking\" mode—ideal for complex reasoning, mathematical problem-solving, and coding—and a \"non-thinking\" mode optimized for efficient, general-purpose dialogue."
+  },
+  {
+    "id": "mistralai/mistral-small-3.1-24b-instruct",
+    "name": "Mistral: Magistral Small",
+    "parameters": {
+      "context": 40000,
+      "max_output_tokens": 40000,
+      "size": "24B"
+    },
+    "provider": "mistral",
+    "pricePerMillionTokens": {
+      "input": 0.45,
+      "output": 1.42
+    },
+    "capabilities": ["text-generation"],
+    "status": "available",
+    "description": "Mistral Small 3.1 (25.03) is an enhanced version of Mistral Small 3 (25.01), now equipped with multimodal capabilities and an extended context length of up to 128K tokens. It can process visual inputs alongside long textual documents, broadening its utility across diverse use cases."
+  },
+  {
+    "id": "openai/gpt-4.1",
+    "name": "OpenAI: GPT-4.1",
+    "parameters": {
+      "context": 1047576,
+      "max_output_tokens": 33000,
+      "size": "-"
+    },
+    "provider": "openai",
+    "pricePerMillionTokens": {
+      "input": 2,
+      "output": 8
+    },
+    "capabilities": ["text-generation"],
+    "status": "available",
+    "description": "GPT-4.1 is a flagship large language model engineered for advanced instruction following, real-world software development, and long-context reasoning. It supports an extensive 1 million token context window and surpasses GPT-4o and GPT-4.5 in key benchmarks, including coding accuracy (54.6% on SWE-bench Verified), instruction compliance (87.4% on IFEval), and multimodal understanding."
+  },
+  {
+    "id": "openai/gpt-4.1-mini",
+    "name": "OpenAI: GPT-4.1 Mini",
+    "parameters": {
+      "context": 1047576,
+      "max_output_tokens": 33000,
+      "size": "-"
+    },
+    "provider": "openai",
+    "pricePerMillionTokens": {
+      "input": 0.4,
+      "output": 1.6
+    },
+    "capabilities": ["text-generation"],
+    "status": "available",
+    "description": "GPT-4.1 Mini is a mid-sized model offering performance comparable to GPT-4o, while operating at significantly lower latency and cost. It maintains a 1 million token context window and demonstrates strong results across key benchmarks—scoring 45.1% on hard instruction evaluations, 35.8% on MultiChallenge, and 84.1% on IFEval."
+  },
+  {
+    "id": "openai/gpt-4.1-nano",
+    "name": "OpenAI: GPT-4.1 Nano",
+    "parameters": {
+      "context": 1047576,
+      "max_output_tokens": 33000,
+      "size": "-"
+    },
+    "provider": "openai",
+    "pricePerMillionTokens": {
+      "input": 0.1,
+      "output": 0.4
+    },
+    "capabilities": ["text-generation"],
+    "status": "available",
+    "description": "GPT‑4.1 Nano is the fastest and most cost-efficient model in the GPT‑4.1 series, designed for tasks where low latency is critical. Despite its compact size, it maintains a 1 million token context window and delivers impressive performance—scoring 80.1% on MMLU, 50.3% on GPQA, and 9.8% on Aider's polyglot coding benchmark, outperforming even GPT‑4o Mini."
+  },
+  {
+    "id": "openai/gpt-4o",
+    "name": "OpenAI: GPT-4o",
+    "parameters": {
+      "context": 128000,
+      "max_output_tokens": 16000,
+      "size": "-"
+    },
+    "provider": "openai",
+    "pricePerMillionTokens": {
+      "input": 2.5,
+      "output": 10
+    },
+    "capabilities": ["text-generation"],
+    "status": "available",
+    "description": "GPT-4o (with \"o\" standing for \"omni\") is OpenAI's latest multimodal model, accepting both text and image inputs and producing text outputs. It matches the intelligence of GPT-4 Turbo while being twice as fast and 50% more cost-efficient. GPT-4o also delivers stronger performance in non-English language processing and features upgraded visual understanding, making it highly versatile across global and multimodal tasks."
+  }
+]
