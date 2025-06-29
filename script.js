@@ -4,32 +4,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatForm = document.getElementById("chat-form");
   const userInput = document.getElementById("user-input");
   const clearHistoryBtn = document.getElementById("clear-history-btn");
-  const modelSelect = document.getElementById("model-select");
-  const modelDetailsDiv = document.getElementById("model-details");
-
-  // Detail spans
-  const detailId = document.getElementById("detail-id");
-  const detailName = document.getElementById("detail-name");
-  const detailProvider = document.getElementById("detail-provider");
-  const detailContext = document.getElementById("detail-context");
-  const detailMaxOutput = document.getElementById("detail-max-output");
-  const detailSize = document.getElementById("detail-size");
-  const detailPriceInput = document.getElementById("detail-price-input");
-  const detailPriceOutput = document.getElementById("detail-price-output");
-  const detailCapabilities = document.getElementById("detail-capabilities");
-  const detailStatus = document.getElementById("detail-status");
-  const detailDescription = document.getElementById("detail-description");
 
   // --- Configuration ---
-  const PROXY_URL = "proxy.php";
-  const MODELS_URL = "proxy.php"; // We'll fetch models from proxy.php GET endpoint
+  const PROXY_URL = "http://localhost/lunos_api/proxy.php";
   const HISTORY_KEY = "lunosChatHistory";
-  const SELECTED_MODEL_KEY = "lunosSelectedModel";
-  const INITIAL_DATA_URL = "data.json"; // Used for initial chat message if no history
+  const INITIAL_DATA_URL = "data.json";
 
   let messages = [];
-  let availableModels = [];
-  let currentModelId = "";
 
   // --- Core Functions ---
 
@@ -43,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (message.role === "bot") {
       // Use marked.js to render Markdown content from the bot
+      // Note: `marked` is configured to be safe against XSS.
       messageElement.innerHTML = marked.parse(message.content);
       processCodeBlocks(messageElement);
     } else {
@@ -135,116 +117,16 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   /**
-   * Fetches the list of available models from the proxy.
-   */
-  const fetchModels = async () => {
-    try {
-      const response = await fetch(MODELS_URL, { method: "GET" });
-      if (!response.ok) {
-        throw new Error(`Failed to fetch models: ${response.statusText}`);
-      }
-      availableModels = await response.json();
-      populateModelSelect();
-    } catch (error) {
-      console.error("Error fetching models:", error);
-      // Add a default model if fetching fails
-      availableModels = [
-        {
-          id: "deepseek/deepseek-chat-v3-0324",
-          name: "DeepSeek V3 0324 (Default)",
-          parameters: { context: "-", max_output_tokens: "-", size: "-" },
-          provider: "deepseek",
-          pricePerMillionTokens: { input: "-", output: "-" },
-          capabilities: ["text-generation"],
-          status: "N/A",
-          description: "Failed to load model details.",
-        },
-      ];
-      populateModelSelect();
-    }
-  };
-
-  /**
-   * Populates the model select dropdown with available models.
-   */
-  const populateModelSelect = () => {
-    modelSelect.innerHTML = ""; // Clear existing options
-    availableModels.forEach((model) => {
-      const option = document.createElement("option");
-      option.value = model.id;
-      option.textContent = model.name;
-      modelSelect.appendChild(option);
-    });
-
-    // Set selected model from localStorage or default to the first one
-    const savedModelId = localStorage.getItem(SELECTED_MODEL_KEY);
-    if (savedModelId && availableModels.some((m) => m.id === savedModelId)) {
-      modelSelect.value = savedModelId;
-      currentModelId = savedModelId;
-    } else if (availableModels.length > 0) {
-      modelSelect.value = availableModels[0].id;
-      currentModelId = availableModels[0].id;
-    }
-    displaySelectedModelDetails();
-  };
-
-  /**
-   * Displays the details of the currently selected model.
-   */
-  const displaySelectedModelDetails = () => {
-    const selectedModel = availableModels.find(
-      (model) => model.id === modelSelect.value
-    );
-
-    if (selectedModel) {
-      detailId.textContent = selectedModel.id;
-      detailName.textContent = selectedModel.name;
-      detailProvider.textContent = selectedModel.provider;
-      detailContext.textContent = selectedModel.parameters.context || "-";
-      detailMaxOutput.textContent =
-        selectedModel.parameters.max_output_tokens || "-";
-      detailSize.textContent = selectedModel.parameters.size || "-";
-      detailPriceInput.textContent =
-        selectedModel.pricePerMillionTokens.input || "-";
-      detailPriceOutput.textContent =
-        selectedModel.pricePerMillionTokens.output || "-";
-      detailCapabilities.textContent = selectedModel.capabilities
-        ? selectedModel.capabilities.join(", ")
-        : "-";
-      detailStatus.textContent = selectedModel.status;
-      detailDescription.textContent = selectedModel.description;
-      currentModelId = selectedModel.id; // Update currentModelId
-      localStorage.setItem(SELECTED_MODEL_KEY, currentModelId); // Save to localStorage
-    } else {
-      // Clear details if no model is selected or found
-      detailId.textContent = "N/A";
-      detailName.textContent = "No Model Selected";
-      detailProvider.textContent = "N/A";
-      detailContext.textContent = "N/A";
-      detailMaxOutput.textContent = "N/A";
-      detailSize.textContent = "N/A";
-      detailPriceInput.textContent = "N/A";
-      detailPriceOutput.textContent = "N/A";
-      detailCapabilities.textContent = "N/A";
-      detailStatus.textContent = "N/A";
-      detailDescription.textContent =
-        "Please select a model from the dropdown.";
-      currentModelId = "";
-      localStorage.removeItem(SELECTED_MODEL_KEY);
-    }
-  };
-
-  /**
    * Displays a temporary loading indicator message
    */
   const showLoadingIndicator = () => {
     const loadingElement = document.createElement("div");
     loadingElement.classList.add("message", "bot-message", "loading-indicator");
     loadingElement.innerHTML = `
-            <div class="loading-dots">
-                <span></span><span></span><span></span>
-            </div>
-        `;
+              <div class="loading-dots">
+                  <span></span><span></span><span></span>
+              </div>
+          `;
     chatBox.appendChild(loadingElement);
     scrollToBottom();
   };
@@ -267,10 +149,6 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     const userText = userInput.value.trim();
     if (!userText) return;
-    if (!currentModelId) {
-      alert("Please select an AI model first!");
-      return;
-    }
 
     // Add user message to state and UI
     const userMessage = { role: "user", content: userText };
@@ -291,10 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          message: userText,
-          modelId: currentModelId, // Send the selected model ID
-        }),
+        body: JSON.stringify({ message: userText }),
       });
 
       hideLoadingIndicator();
@@ -341,8 +216,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  modelSelect.addEventListener("change", displaySelectedModelDetails);
-
   // Auto-resize textarea
   userInput.addEventListener("input", () => {
     userInput.style.height = "auto";
@@ -359,8 +232,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- Initialisation ---
   loadHistory();
-  fetchModels(); // Fetch models when the page loads
-
   marked.setOptions({
     breaks: true, // Add <br> on single line breaks
     gfm: true, // Use GitHub Flavored Markdown
