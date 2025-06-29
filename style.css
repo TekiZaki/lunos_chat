@@ -10,8 +10,6 @@
   --header-bg: #2d2d2d;
   --button-color: #007acc;
   --button-hover-color: #005a9e;
-  --model-details-bg: #333;
-  --model-details-text: #bbb;
 }
 
 * {
@@ -52,20 +50,11 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
-  gap: 10px;
 }
 
 .chat-header h2 {
   font-size: 1.2rem;
   color: #fff;
-  margin-right: auto; /* Push controls to the right */
-}
-
-.header-controls {
-  display: flex;
-  gap: 10px;
-  align-items: center;
 }
 
 #clear-history-btn {
@@ -81,64 +70,6 @@ body {
 
 #clear-history-btn:hover {
   background: #e74c3c;
-}
-
-#model-select {
-  background-color: var(--input-bg);
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
-  border-radius: 5px;
-  padding: 5px 10px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  -webkit-appearance: none; /* Remove default dropdown arrow for better styling */
-  -moz-appearance: none;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23d4d4d4'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 8px center;
-  padding-right: 28px;
-}
-
-#model-select:focus {
-  outline: none;
-  border-color: var(--button-color);
-}
-
-.model-details {
-  background-color: var(--model-details-bg);
-  color: var(--model-details-text);
-  padding: 10px 20px;
-  border-bottom: 1px solid var(--border-color);
-  font-size: 0.85rem;
-  line-height: 1.4;
-  max-height: 150px; /* Limit height */
-  overflow-y: auto; /* Allow scrolling */
-}
-
-.model-details strong {
-  color: #fff;
-}
-
-.model-details p {
-  margin-bottom: 5px;
-}
-
-.model-details p:last-child {
-  margin-bottom: 0;
-}
-
-/* Custom scrollbar for model details */
-.model-details::-webkit-scrollbar {
-  width: 6px;
-}
-.model-details::-webkit-scrollbar-track {
-  background: var(--model-details-bg);
-}
-.model-details::-webkit-scrollbar-thumb {
-  background-color: var(--bot-msg-bg);
-  border-radius: 10px;
-  border: 1px solid var(--model-details-bg);
 }
 
 .chat-box {
