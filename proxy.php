@@ -10,10 +10,10 @@ use GuzzleHttp\RequestOptions;
 // --- KONFIGURASI PENTING ---
 // Ganti dengan API Key Lunos Anda yang sebenarnya
 $lunosApiKey = 'YOUR_API_KEY';
+// Ganti dengan Model ID yang Anda gunakan
+$modelId = 'deepseek/deepseek-chat-v3-0324';
 // Endpoint Lunos API
 $lunosApiUrl = 'https://api.lunos.tech/v1/chat/completions';
-// Path to your models list JSON file
-$modelsListPath = __DIR__ . '/models.json';
 
 // --- PENGATURAN CORS ---
 // Izinkan origin dari mana request akan datang.
@@ -22,9 +22,9 @@ $modelsListPath = __DIR__ . '/models.json';
 $allowedOrigin = 'http://127.0.0.1:5500'; // Ganti jika Live Server Anda menggunakan port lain
 
 header("Access-Control-Allow-Origin: $allowedOrigin");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS"); // Izinkan GET (for models.json), POST, dan OPTIONS
-header("Access-Control-Allow-Headers: Content-Type");
-header("Content-Type: application/json");
+header("Access-Control-Allow-Methods: POST, OPTIONS"); // Izinkan metode POST dan OPTIONS (untuk preflight request)
+header("Access-Control-Allow-Headers: Content-Type"); // Izinkan header Content-Type
+header("Content-Type: application/json"); // Respons akan selalu dalam format JSON
 
 // Handle preflight OPTIONS request
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -32,30 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
-// --- Handle requests ---
-
-// Handle GET request for models.json
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (file_exists($modelsListPath)) {
-        echo file_get_contents($modelsListPath);
-        exit();
-    } else {
-        http_response_code(404);
-        echo json_encode(['error' => 'models.json not found']);
-        exit();
-    }
-}
-
-// Only process if request is POST (for chat completions)
+// Hanya proses jika request adalah POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Ambil data JSON dari request frontend
     $input = file_get_contents('php://input');
     $data = json_decode($input, true);
 
-    // Pastikan pesan pengguna dan model ID ada
-    $userMessage = $data['message'] ?? 'Hello, how are you?';
-    // Get model ID from the request, default to a sensible one if not provided
-    $modelId = $data['modelId'] ?? 'deepseek/deepseek-chat-v3-0324';
+    // Pastikan pesan pengguna ada
+    $userMessage = $data['message'] ?? 'Hello, how are you?'; // Default message jika tidak ada
 
     try {
         $client = new Client([
@@ -65,13 +49,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $response = $client->post('chat/completions', [
             RequestOptions::JSON => [
-                'model' => $modelId, // Use the dynamic model ID
+                'model' => $modelId,
                 'messages' => [
                     ['role' => 'system', 'content' => 'You are a helpful and friendly assistant named Lunos. Provide concise and helpful answers.'],
                     ['role' => 'user', 'content' => $userMessage]
                 ],
                 'temperature' => 0.7
             ],
+            // Autentikasi di sini, bukan di client global headers
             'headers' => [
                 'Authorization' => 'Bearer ' . $lunosApiKey,
                 'Content-Type' => 'application/json',
@@ -100,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['error' => 'An unexpected error occurred: ' . $e->getMessage()]);
     }
 } else {
-    // If not GET or POST, return error
+    // Jika bukan metode POST, kembalikan error
     http_response_code(405); // Method Not Allowed
     echo json_encode(['error' => 'Method Not Allowed']);
 }
