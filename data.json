@@ -1,0 +1,22 @@
+[
+    {
+        "role": "user",
+        "content": "Hello",
+        "time": "2025-06-29 16:20:57"
+    },
+    {
+        "role": "bot",
+        "content": "Hello! \ud83d\udc4b I'm Lunos, your friendly AI assistant. How can I help you today? \ud83d\ude0a",
+        "time": "2025-06-29 16:20:57"
+    },
+    {
+        "role": "user",
+        "content": "Hello, Can you say \"Football is FUN!!!\"",
+        "time": "2025-06-29 16:30:25"
+    },
+    {
+        "role": "bot",
+        "content": "Of course! Here you go:\n\n```\nFootball is FUN!!!\n``` \u26bd\ud83d\ude03",
+        "time": "2025-06-29 16:30:25"
+    }
+]
