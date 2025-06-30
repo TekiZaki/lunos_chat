@@ -9,7 +9,7 @@ use GuzzleHttp\RequestOptions;
 
 // --- KONFIGURASI PENTING ---
 // Ganti dengan API Key Lunos Anda yang sebenarnya
-$lunosApiKey = 'YOUR_API_KEY';
+$lunosApiKey = 'API_KEY_ANDA'; // Ganti dengan API Key Lunos Anda
 // Ganti dengan Model ID yang Anda gunakan
 $modelId = 'deepseek/deepseek-chat-v3-0324';
 // Endpoint Lunos API
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $client = new Client([
             'base_uri' => 'https://api.lunos.tech/v1/',
-            'timeout'  => 30.0, // Timeout dalam detik
+            'timeout'  => 1500.0, // Timeout dalam detik
         ]);
 
         $response = $client->post('chat/completions', [
