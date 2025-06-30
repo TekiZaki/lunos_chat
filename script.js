@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   marked.setOptions({
     breaks: true, // This is the key option. It turns single newlines into <br> tags.
     gfm: true, // Use GitHub Flavored Markdown for better compatibility.
-    sanitize: false, // Set to true if you don't trust the Markdown source
+    sanitize: true, // ENABLED: Set to true if you don't trust the Markdown source
   });
 
   // --- Application State ---
